@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Subdomain In Free</title>
       <link rel="icon" href="favicon.png" sizes="48x48" type="image/png">
-
+        <link rel="stylesheet" href="./assets/css/cursor.css">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
@@ -284,6 +284,91 @@
             0% { transform: translate(-50%, -50%) rotate(0deg); }
             100% { transform: translate(-50%, -50%) rotate(360deg); }
         }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #F3F4F6; /* Light gray background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .notification {
+            position: fixed;
+            top: 15%;
+            right: 50%;
+            transform: translateX(50%);
+            background: linear-gradient(145deg, #6C63FF, #3A40D8); /* Gradient of purple and blue */
+            color: white;
+            padding: 20px 30px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            min-width: 280px;
+            max-width: 90%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.6s ease, visibility 0s 0.6s;
+            z-index: 1000;
+        }
+
+        .notification.show {
+            opacity: 1;
+            visibility: visible;
+            transition: opacity 0.6s ease;
+        }
+
+        .notification p {
+            margin-right: 20px;
+            font-size: 16px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        #notification-btn {
+            background-color: #ffffff;
+            color: #6C63FF;
+            border: 2px solid #6C63FF;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #notification-btn:hover {
+            background-color: #6C63FF;
+            color: white;
+            transform: scale(1.05);
+        }
+
+        /* Responsive Design */
+        @media screen and (max-width: 600px) {
+            .notification {
+                min-width: 250px;
+                padding: 15px 20px;
+            }
+
+            .notification p {
+                font-size: 14px;
+            }
+
+            #notification-btn {
+                font-size: 12px;
+                padding: 10px 15px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -302,7 +387,10 @@
             
         </div>
     </nav>
-
+<div class="notification" id="notification">
+        <p>Click here to visit the website!</p>
+        <button id="notification-btn">Go</button>
+    </div>
     <!-- Main Container -->
     <div class="container">
         <!-- Form Container -->
@@ -422,6 +510,23 @@
         // Scroll to top functionality for floating button
         document.querySelector('.fab').addEventListener('click', function() {
             window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+        document.addEventListener("DOMContentLoaded", function() {
+            // Show the notification
+            const notification = document.getElementById("notification");
+            setTimeout(() => {
+                notification.classList.add("show");
+            }, 500); // Delay before showing the notification
+
+            // Redirect when the button is clicked
+            document.getElementById("notification-btn").addEventListener("click", function() {
+                window.location.href = "https://www.example.com";  // Replace with the website you want to redirect to
+            });
+
+            // Hide the notification after 3 seconds
+            setTimeout(() => {
+                notification.classList.remove("show");
+            }, 6000);  // The notification will disappear after 3 seconds
         });
     </script>
 
